@@ -1,0 +1,373 @@
+<html>
+<head>
+<title>view.dart</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #a9b7c6;}
+.s1 { color: #6a8759;}
+.s2 { color: #cc7832;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+view.dart</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">'package:carousel_slider/carousel_slider.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:flutter/material.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:flutter_screenutil/flutter_screenutil.dart'</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">'../../../core/design/Home_appbar/view.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'../../../core/design/app_image.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'../../../gen/assets.gen.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'../../all_categories/view.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'../../categories_details/view.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'../../product_details/view.dart'</span><span class="s2">;</span>
+
+<span class="s2">class </span><span class="s0">HomeView </span><span class="s2">extends </span><span class="s0">StatefulWidget {</span>
+  <span class="s2">const </span><span class="s0">HomeView({</span><span class="s2">super</span><span class="s0">.key})</span><span class="s2">;</span>
+
+  <span class="s0">@override</span>
+  <span class="s0">State&lt;HomeView&gt; createState() =&gt; _HomeViewState()</span><span class="s2">;</span>
+<span class="s0">}</span>
+
+<span class="s2">class </span><span class="s0">_HomeViewState </span><span class="s2">extends </span><span class="s0">State&lt;HomeView&gt; {</span>
+  <span class="s0">int currentIndex = </span><span class="s3">0</span><span class="s2">;</span>
+
+  <span class="s0">@override</span>
+  <span class="s0">Widget build(BuildContext context) {</span>
+    <span class="s2">return </span><span class="s0">SafeArea(</span>
+      <span class="s0">child: Scaffold(</span>
+        <span class="s0">appBar: </span><span class="s2">const </span><span class="s0">HomeAppBar()</span><span class="s2">,</span>
+        <span class="s0">body: ListView(</span>
+            <span class="s0">padding: EdgeInsets.symmetric(horizontal: </span><span class="s3">16</span><span class="s0">.w)</span><span class="s2">,</span>
+            <span class="s0">children: [</span>
+              <span class="s0">CarouselSlider(</span>
+                <span class="s0">items: List.generate(</span>
+                  <span class="s3">5</span><span class="s2">,</span>
+                  <span class="s0">(index) =&gt; AppImage(</span>
+                    <span class="s0">Assets.images.sliderimage.path</span><span class="s2">,</span>
+                    <span class="s0">fit: BoxFit.fill</span><span class="s2">,</span>
+                    <span class="s0">width: MediaQuery.of(context).size.width</span><span class="s2">,</span>
+
+                  <span class="s0">)</span><span class="s2">,</span>
+                <span class="s0">)</span><span class="s2">,</span>
+                <span class="s0">options: CarouselOptions(</span>
+                  <span class="s0">height: </span><span class="s3">139</span><span class="s0">.h</span><span class="s2">,</span>
+                  <span class="s0">autoPlay: </span><span class="s2">true,</span>
+                  <span class="s0">viewportFraction: </span><span class="s3">1</span><span class="s2">,</span>
+                  <span class="s0">onPageChanged: (index</span><span class="s2">, </span><span class="s0">reason) {</span>
+                    <span class="s0">currentIndex = index</span><span class="s2">;</span>
+                    <span class="s0">setState(() {})</span><span class="s2">;</span>
+                  <span class="s0">}</span><span class="s2">,</span>
+                <span class="s0">)</span><span class="s2">,</span>
+              <span class="s0">)</span><span class="s2">,</span>
+              <span class="s0">SizedBox(height: </span><span class="s3">7</span><span class="s0">.h)</span><span class="s2">,</span>
+              <span class="s0">Row(</span>
+                <span class="s0">mainAxisAlignment: MainAxisAlignment.center</span><span class="s2">,</span>
+                <span class="s0">children: List.generate(</span>
+                  <span class="s3">5</span><span class="s2">,</span>
+                  <span class="s0">(index) =&gt; Padding(</span>
+                    <span class="s0">padding: EdgeInsetsDirectional.only(end: </span><span class="s3">8</span><span class="s0">.w)</span><span class="s2">,</span>
+                    <span class="s0">child: CircleAvatar(</span>
+                      <span class="s0">radius: index == currentIndex ? </span><span class="s3">5</span><span class="s0">.r : </span><span class="s3">4</span><span class="s0">.r</span><span class="s2">,</span>
+                      <span class="s0">backgroundColor: index == currentIndex</span>
+                          <span class="s0">? </span><span class="s2">const </span><span class="s0">Color(</span><span class="s3">0xff50555C</span><span class="s0">)</span>
+                          <span class="s0">: </span><span class="s2">const </span><span class="s0">Color(</span><span class="s3">0xff979797</span><span class="s0">)</span><span class="s2">,</span>
+                    <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">)</span><span class="s2">,</span>
+                <span class="s0">)</span><span class="s2">,</span>
+              <span class="s0">)</span><span class="s2">,</span>
+              <span class="s0">SizedBox(height: </span><span class="s3">16</span><span class="s0">.h)</span><span class="s2">,</span>
+              <span class="s0">Column(</span>
+                <span class="s0">crossAxisAlignment: CrossAxisAlignment.start</span><span class="s2">,</span>
+                <span class="s0">children: [</span>
+                  <span class="s0">TextButton(</span>
+                    <span class="s0">onPressed: () {</span>
+                      <span class="s0">Navigator.push(</span>
+                          <span class="s0">context</span><span class="s2">,</span>
+                          <span class="s0">MaterialPageRoute(</span>
+                              <span class="s0">builder: (context) =&gt; </span><span class="s2">const </span><span class="s0">AllCategoriesView()))</span><span class="s2">;</span>
+                    <span class="s0">}</span><span class="s2">,</span>
+                    <span class="s0">child: Text(</span>
+                      <span class="s1">&quot;All Categories&quot;</span><span class="s2">,</span>
+                      <span class="s0">style: TextStyle(</span>
+                        <span class="s0">color: Theme.of(context).primaryColor</span><span class="s2">,</span>
+                        <span class="s0">fontSize: </span><span class="s3">14</span><span class="s0">.sp</span><span class="s2">,</span>
+                        <span class="s0">fontWeight: FontWeight.w700</span><span class="s2">,</span>
+                      <span class="s0">)</span><span class="s2">,</span>
+                    <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">SizedBox(</span>
+                    <span class="s0">height: </span><span class="s3">120</span><span class="s0">.h</span><span class="s2">,</span>
+                    <span class="s0">child: ListView.separated(</span>
+                      <span class="s0">itemBuilder: (context</span><span class="s2">, </span><span class="s0">index) =&gt; </span><span class="s2">const </span><span class="s0">_ItemCategory()</span><span class="s2">,</span>
+                      <span class="s0">separatorBuilder: (context</span><span class="s2">, </span><span class="s0">index) =&gt;</span>
+                          <span class="s0">SizedBox(width: </span><span class="s3">8</span><span class="s0">.w)</span><span class="s2">,</span>
+                      <span class="s0">itemCount: </span><span class="s3">4</span><span class="s2">,</span>
+                      <span class="s0">scrollDirection: Axis.horizontal</span><span class="s2">,</span>
+                    <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">)</span><span class="s2">,</span>
+                <span class="s0">]</span><span class="s2">,</span>
+              <span class="s0">)</span><span class="s2">,</span>
+              <span class="s0">SizedBox(height: </span><span class="s3">20</span><span class="s0">.h)</span><span class="s2">,</span>
+              <span class="s0">AppImage(</span>
+                <span class="s0">Assets.images.watchsale.path</span><span class="s2">,</span>
+                <span class="s0">fit: BoxFit.fill</span><span class="s2">,</span>
+              <span class="s0">)</span><span class="s2">,</span>
+              <span class="s0">SizedBox(height: </span><span class="s3">23</span><span class="s0">.h)</span><span class="s2">,</span>
+              <span class="s0">Column(</span>
+                <span class="s0">crossAxisAlignment: CrossAxisAlignment.start</span><span class="s2">,</span>
+                <span class="s0">children: [</span>
+                  <span class="s0">Text(</span>
+                    <span class="s1">&quot;Flash Sale&quot;</span><span class="s2">,</span>
+                    <span class="s0">style: TextStyle(</span>
+                      <span class="s0">color: </span><span class="s2">const </span><span class="s0">Color(</span><span class="s3">0xffED1C24</span><span class="s0">)</span><span class="s2">,</span>
+                      <span class="s0">fontSize: </span><span class="s3">14</span><span class="s0">.sp</span><span class="s2">,</span>
+                      <span class="s0">fontWeight: FontWeight.w700</span><span class="s2">,</span>
+                    <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">SizedBox(height: </span><span class="s3">13</span><span class="s0">.h)</span><span class="s2">,</span>
+                  <span class="s0">SizedBox(</span>
+                    <span class="s0">height: </span><span class="s3">208</span><span class="s0">.h</span><span class="s2">,</span>
+                    <span class="s0">child: ListView.separated(</span>
+                      <span class="s0">itemBuilder: (context</span><span class="s2">, </span><span class="s0">index) =&gt; </span><span class="s2">const </span><span class="s0">_ItemSale()</span><span class="s2">,</span>
+                      <span class="s0">separatorBuilder: (context</span><span class="s2">, </span><span class="s0">index) =&gt;</span>
+                          <span class="s0">SizedBox(width: </span><span class="s3">8</span><span class="s0">.w)</span><span class="s2">,</span>
+                      <span class="s0">itemCount: </span><span class="s3">3</span><span class="s2">,</span>
+                      <span class="s0">scrollDirection: Axis.horizontal</span><span class="s2">,</span>
+                    <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">)</span><span class="s2">,</span>
+                <span class="s0">]</span><span class="s2">,</span>
+              <span class="s0">)</span><span class="s2">,</span>
+              <span class="s0">SizedBox(height: </span><span class="s3">29</span><span class="s0">.h)</span><span class="s2">,</span>
+              <span class="s0">Text(</span>
+                <span class="s1">&quot;You May Like &quot;</span><span class="s2">,</span>
+                <span class="s0">style: TextStyle(</span>
+                  <span class="s0">color: </span><span class="s2">const </span><span class="s0">Color(</span><span class="s3">0xff50555C</span><span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">fontSize: </span><span class="s3">14</span><span class="s0">.sp</span><span class="s2">,</span>
+                  <span class="s0">fontWeight: FontWeight.w700</span><span class="s2">,</span>
+                <span class="s0">)</span><span class="s2">,</span>
+              <span class="s0">)</span><span class="s2">,</span>
+              <span class="s0">SizedBox(height: </span><span class="s3">7</span><span class="s0">.h)</span><span class="s2">,</span>
+              <span class="s0">GridView.builder(</span>
+                <span class="s0">physics: </span><span class="s2">const </span><span class="s0">NeverScrollableScrollPhysics()</span><span class="s2">,</span>
+                <span class="s0">shrinkWrap: </span><span class="s2">true,</span>
+                <span class="s0">gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(</span>
+                  <span class="s0">crossAxisCount: </span><span class="s3">2</span><span class="s2">,</span>
+                  <span class="s0">crossAxisSpacing: </span><span class="s3">31</span><span class="s0">.w</span><span class="s2">,</span>
+                  <span class="s0">mainAxisSpacing: </span><span class="s3">29</span><span class="s0">.h</span><span class="s2">,</span>
+                  <span class="s0">childAspectRatio: </span><span class="s3">.8</span><span class="s2">,</span>
+                <span class="s0">)</span><span class="s2">,</span>
+                <span class="s0">itemCount: </span><span class="s3">8</span><span class="s2">,</span>
+                <span class="s0">itemBuilder: (context</span><span class="s2">, </span><span class="s0">index) =&gt; </span><span class="s2">const </span><span class="s0">_ItemLike()</span><span class="s2">,</span>
+              <span class="s0">)</span><span class="s2">,</span>
+            <span class="s0">])</span><span class="s2">,</span>
+      <span class="s0">)</span><span class="s2">,</span>
+    <span class="s0">)</span><span class="s2">;</span>
+  <span class="s0">}</span>
+<span class="s0">}</span>
+
+<span class="s2">class </span><span class="s0">_ItemCategory </span><span class="s2">extends </span><span class="s0">StatelessWidget {</span>
+  <span class="s2">const </span><span class="s0">_ItemCategory()</span><span class="s2">;</span>
+
+  <span class="s0">@override</span>
+  <span class="s0">Widget build(BuildContext context) {</span>
+    <span class="s2">return </span><span class="s0">InkWell(</span>
+      <span class="s0">onTap: () {</span>
+        <span class="s0">Navigator.push(</span>
+            <span class="s0">context</span><span class="s2">, </span><span class="s0">MaterialPageRoute(builder: (context) =&gt; </span><span class="s2">const </span><span class="s0">CategoriesDetailsView()))</span><span class="s2">;</span>
+      <span class="s0">}</span><span class="s2">,</span>
+      <span class="s0">child: Column(children: [</span>
+        <span class="s0">AppImage(</span>
+          <span class="s0">Assets.images.product.path</span><span class="s2">,</span>
+          <span class="s0">height: </span><span class="s3">99</span><span class="s0">.h</span><span class="s2">,</span>
+          <span class="s0">width: </span><span class="s3">99</span><span class="s0">.w</span><span class="s2">,</span>
+        <span class="s0">)</span><span class="s2">,</span>
+        <span class="s0">SizedBox(height: </span><span class="s3">4</span><span class="s0">.h)</span><span class="s2">,</span>
+        <span class="s0">SizedBox(</span>
+          <span class="s0">width: </span><span class="s3">99</span><span class="s0">.w</span><span class="s2">,</span>
+          <span class="s0">child: Center(</span>
+            <span class="s0">child: Text(</span>
+              <span class="s1">&quot;Category Name&quot;</span><span class="s2">,</span>
+              <span class="s0">style: TextStyle(</span>
+                <span class="s0">color: </span><span class="s2">const </span><span class="s0">Color(</span><span class="s3">0xff50555C</span><span class="s0">)</span><span class="s2">,</span>
+                <span class="s0">fontSize: </span><span class="s3">10</span><span class="s0">.sp</span><span class="s2">,</span>
+                <span class="s0">fontWeight: FontWeight.w400</span><span class="s2">,</span>
+              <span class="s0">)</span><span class="s2">,</span>
+            <span class="s0">)</span><span class="s2">,</span>
+          <span class="s0">)</span><span class="s2">,</span>
+        <span class="s0">)</span><span class="s2">,</span>
+      <span class="s0">])</span><span class="s2">,</span>
+    <span class="s0">)</span><span class="s2">;</span>
+  <span class="s0">}</span>
+<span class="s0">}</span>
+
+<span class="s2">class </span><span class="s0">_ItemSale </span><span class="s2">extends </span><span class="s0">StatelessWidget {</span>
+  <span class="s2">const </span><span class="s0">_ItemSale()</span><span class="s2">;</span>
+
+  <span class="s0">@override</span>
+  <span class="s0">Widget build(BuildContext context) {</span>
+    <span class="s2">return </span><span class="s0">Column(children: [</span>
+      <span class="s0">Stack(children: [</span>
+        <span class="s0">InkWell(</span>
+          <span class="s0">onTap: () {</span>
+            <span class="s0">Navigator.push(</span>
+                <span class="s0">context</span><span class="s2">, </span><span class="s0">MaterialPageRoute(builder: (context) =&gt; </span><span class="s2">const </span><span class="s0">ProductDetailsView()))</span><span class="s2">;</span>
+          <span class="s0">}</span><span class="s2">,</span>
+          <span class="s0">child: AppImage(</span>
+            <span class="s0">Assets.images.product2.path</span><span class="s2">,</span>
+            <span class="s0">height: </span><span class="s3">162</span><span class="s0">.h</span><span class="s2">,</span>
+            <span class="s0">width: </span><span class="s3">155</span><span class="s0">.w</span><span class="s2">,</span>
+            <span class="s0">fit: BoxFit.fill</span><span class="s2">,</span>
+          <span class="s0">)</span><span class="s2">,</span>
+        <span class="s0">)</span><span class="s2">,</span>
+        <span class="s0">Padding(</span>
+          <span class="s0">padding: EdgeInsets.all(</span><span class="s3">8</span><span class="s0">.r)</span><span class="s2">,</span>
+          <span class="s0">child: InkWell(</span>
+            <span class="s0">onTap: () {</span>
+
+            <span class="s0">}</span><span class="s2">,</span>
+            <span class="s0">child: AppImage(</span>
+              <span class="s0">Assets.icons.svg.favorite</span><span class="s2">,</span>
+              <span class="s0">color: Colors.white</span><span class="s2">,</span>
+              <span class="s0">fit: BoxFit.fill</span><span class="s2">,</span>
+            <span class="s0">)</span><span class="s2">,</span>
+          <span class="s0">)</span><span class="s2">,</span>
+        <span class="s0">)</span><span class="s2">,</span>
+      <span class="s0">])</span><span class="s2">,</span>
+      <span class="s0">SizedBox(height: </span><span class="s3">4</span><span class="s0">.h)</span><span class="s2">,</span>
+      <span class="s0">SizedBox(</span>
+        <span class="s0">width: </span><span class="s3">155</span><span class="s0">.w</span><span class="s2">,</span>
+        <span class="s0">child: Center(</span>
+          <span class="s0">child: Text.rich(</span>
+            <span class="s0">TextSpan(</span>
+                <span class="s0">text: </span><span class="s1">&quot;FS - Nike Air Max 270 React&quot;</span><span class="s2">,</span>
+                <span class="s0">style: TextStyle(</span>
+                  <span class="s0">fontSize: </span><span class="s3">12</span><span class="s2">,</span>
+                  <span class="s0">fontWeight: FontWeight.w700</span><span class="s2">,</span>
+                  <span class="s0">color: Theme.of(context).primaryColor</span><span class="s2">,</span>
+                <span class="s0">)</span><span class="s2">,</span>
+                <span class="s0">children: </span><span class="s2">const </span><span class="s0">[</span>
+                  <span class="s0">TextSpan(text: </span><span class="s1">&quot;\n&quot;</span><span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">TextSpan(</span>
+                    <span class="s0">text: </span><span class="s1">&quot;\$299,43&quot;</span><span class="s2">,</span>
+                    <span class="s0">style: TextStyle(</span>
+                      <span class="s0">fontSize: </span><span class="s3">12</span><span class="s2">,</span>
+                      <span class="s0">fontWeight: FontWeight.w700</span><span class="s2">,</span>
+                      <span class="s0">color: Color(</span><span class="s3">0xff50555C</span><span class="s0">)</span><span class="s2">,</span>
+                    <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">TextSpan(text: </span><span class="s1">&quot;\n&quot;</span><span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">TextSpan(</span>
+                    <span class="s0">text: </span><span class="s1">&quot;\$534,33&quot;</span><span class="s2">,</span>
+                    <span class="s0">style: TextStyle(</span>
+                      <span class="s0">decoration: TextDecoration.lineThrough</span><span class="s2">,</span>
+                      <span class="s0">fontSize: </span><span class="s3">10</span><span class="s2">,</span>
+                      <span class="s0">fontWeight: FontWeight.w400</span><span class="s2">,</span>
+                      <span class="s0">color: Color(</span><span class="s3">0xff9098B1</span><span class="s0">)</span><span class="s2">,</span>
+                    <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">TextSpan(text: </span><span class="s1">&quot;   &quot;</span><span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">TextSpan(</span>
+                    <span class="s0">text: </span><span class="s1">&quot;24% Off&quot;</span><span class="s2">,</span>
+                    <span class="s0">style: TextStyle(</span>
+                       <span class="s0">fontSize: </span><span class="s3">10</span><span class="s2">,</span>
+                      <span class="s0">fontWeight: FontWeight.w700</span><span class="s2">,</span>
+                      <span class="s0">color: Color(</span><span class="s3">0xffFB7181</span><span class="s0">)</span><span class="s2">,</span>
+                    <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">)</span><span class="s2">,</span>
+                <span class="s0">])</span><span class="s2">,</span>
+          <span class="s0">)</span><span class="s2">,</span>
+        <span class="s0">)</span><span class="s2">,</span>
+      <span class="s0">)</span><span class="s2">,</span>
+    <span class="s0">])</span><span class="s2">;</span>
+  <span class="s0">}</span>
+<span class="s0">}</span>
+
+<span class="s2">class </span><span class="s0">_ItemLike </span><span class="s2">extends </span><span class="s0">StatelessWidget {</span>
+  <span class="s2">const </span><span class="s0">_ItemLike()</span><span class="s2">;</span>
+
+  <span class="s0">@override</span>
+  <span class="s0">Widget build(BuildContext context) {</span>
+    <span class="s2">return </span><span class="s0">Column(children: [</span>
+      <span class="s0">Stack(children: [</span>
+        <span class="s0">InkWell(</span>
+          <span class="s0">onTap: () {</span>
+            <span class="s0">Navigator.push(</span>
+                <span class="s0">context</span><span class="s2">, </span><span class="s0">MaterialPageRoute(builder: (context) =&gt; </span><span class="s2">const </span><span class="s0">ProductDetailsView()))</span><span class="s2">;</span>
+          <span class="s0">}</span><span class="s2">,</span>
+          <span class="s0">child: AppImage(</span>
+            <span class="s0">Assets.images.product2.path</span><span class="s2">,</span>
+            <span class="s0">height: </span><span class="s3">162</span><span class="s0">.h</span><span class="s2">,</span>
+            <span class="s0">width: </span><span class="s3">155</span><span class="s0">.w</span><span class="s2">,</span>
+            <span class="s0">fit: BoxFit.fill</span><span class="s2">,</span>
+          <span class="s0">)</span><span class="s2">,</span>
+        <span class="s0">)</span><span class="s2">,</span>
+        <span class="s0">Padding(</span>
+          <span class="s0">padding: EdgeInsets.all(</span><span class="s3">8</span><span class="s0">.r)</span><span class="s2">,</span>
+          <span class="s0">child: InkWell(</span>
+            <span class="s0">onTap: () {</span>
+
+            <span class="s0">}</span><span class="s2">,</span>
+            <span class="s0">child: AppImage(</span>
+              <span class="s0">Assets.icons.svg.favorite</span><span class="s2">,</span>
+              <span class="s0">color: Colors.white</span><span class="s2">,</span>
+              <span class="s0">fit: BoxFit.fill</span><span class="s2">,</span>
+            <span class="s0">)</span><span class="s2">,</span>
+          <span class="s0">)</span><span class="s2">,</span>
+        <span class="s0">)</span><span class="s2">,</span>
+      <span class="s0">])</span><span class="s2">,</span>
+      <span class="s0">SizedBox(height: </span><span class="s3">4</span><span class="s0">.h)</span><span class="s2">,</span>
+      <span class="s0">SizedBox(</span>
+        <span class="s0">width: </span><span class="s3">155</span><span class="s0">.w</span><span class="s2">,</span>
+        <span class="s0">child: Center(</span>
+          <span class="s0">child: Text.rich(</span>
+            <span class="s0">TextSpan(</span>
+                <span class="s0">text: </span><span class="s1">&quot;FS - Nike Air Max 270 React&quot;</span><span class="s2">,</span>
+                <span class="s0">style: TextStyle(</span>
+                  <span class="s0">fontSize: </span><span class="s3">12</span><span class="s2">,</span>
+                  <span class="s0">fontWeight: FontWeight.w700</span><span class="s2">,</span>
+                  <span class="s0">color: Theme.of(context).primaryColor</span><span class="s2">,</span>
+                <span class="s0">)</span><span class="s2">,</span>
+                <span class="s0">children: </span><span class="s2">const </span><span class="s0">[</span>
+                  <span class="s0">TextSpan(text: </span><span class="s1">&quot;\n&quot;</span><span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">TextSpan(</span>
+                    <span class="s0">text: </span><span class="s1">&quot;\$299,43&quot;</span><span class="s2">,</span>
+                    <span class="s0">style: TextStyle(</span>
+                      <span class="s0">fontSize: </span><span class="s3">12</span><span class="s2">,</span>
+                      <span class="s0">fontWeight: FontWeight.w700</span><span class="s2">,</span>
+                      <span class="s0">color: Color(</span><span class="s3">0xff50555C</span><span class="s0">)</span><span class="s2">,</span>
+                    <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">TextSpan(text: </span><span class="s1">&quot;\n&quot;</span><span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">TextSpan(</span>
+                    <span class="s0">text: </span><span class="s1">&quot;\$534,33&quot;</span><span class="s2">,</span>
+                    <span class="s0">style: TextStyle(</span>
+                      <span class="s0">decoration: TextDecoration.lineThrough</span><span class="s2">,</span>
+                      <span class="s0">fontSize: </span><span class="s3">10</span><span class="s2">,</span>
+                      <span class="s0">fontWeight: FontWeight.w400</span><span class="s2">,</span>
+                      <span class="s0">color: Color(</span><span class="s3">0xff9098B1</span><span class="s0">)</span><span class="s2">,</span>
+                    <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">TextSpan(text: </span><span class="s1">&quot;   &quot;</span><span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">TextSpan(</span>
+                    <span class="s0">text: </span><span class="s1">&quot;24% Off&quot;</span><span class="s2">,</span>
+                    <span class="s0">style: TextStyle(</span>
+                       <span class="s0">fontSize: </span><span class="s3">10</span><span class="s2">,</span>
+                      <span class="s0">fontWeight: FontWeight.w700</span><span class="s2">,</span>
+                      <span class="s0">color: Color(</span><span class="s3">0xffFB7181</span><span class="s0">)</span><span class="s2">,</span>
+                    <span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">)</span><span class="s2">,</span>
+                <span class="s0">])</span><span class="s2">,</span>
+          <span class="s0">)</span><span class="s2">,</span>
+        <span class="s0">)</span><span class="s2">,</span>
+      <span class="s0">)</span><span class="s2">,</span>
+    <span class="s0">])</span><span class="s2">;</span>
+  <span class="s0">}</span>
+<span class="s0">}</span>
+</pre>
+</body>
+</html>
